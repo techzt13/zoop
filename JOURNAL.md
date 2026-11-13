@@ -110,7 +110,9 @@ It is still an unbuilt digital prototype. Before treating the design as complete
 
 After funding and construction, the next stage will be testing the electronics off-body, characterizing the optical signal, assessing wrist placement and motion artifacts, and documenting the real results with photos and a demo. I will not use the experimental readings for medical or safety decisions.
 
-**Photos:** Not provided
+**Photos:** CAD assembly render (not a photo of a completed device).
+
+![CAD assembly render](images/cad-assembly.png)
 
 **Time spent:** Not provided
 
@@ -126,6 +128,8 @@ The listed merchandise subtotal is $141.69, but that isn’t the final build cos
 
 The enclosure remains a draft based on approximate module dimensions. I can’t measure the parts yet, so the fit, mounting, and wiring will need to be checked once they’re available. The BOM currently marks six parts as owned; that needs correcting if they aren’t actually available.
 
-**Photos:** Not provided
+**Photos:** CAD assembly render (not a photo of a completed device).
+
+![CAD assembly render](images/cad-assembly.png)
 
 **Time spent:** Not provided
