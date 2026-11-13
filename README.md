@@ -95,7 +95,7 @@ The FreeCAD solids and STEP round trips passed geometric checks; KiCad 9 ERC and
 
 **Not a medical device.** Motion, light, pressure, skin contact and sensor quality can make readings wrong. Do not use ZOOP for diagnosis, treatment, exercise safety decisions or emergencies. Never wear it connected to a mains-powered charger/computer; never connect a bare LiPo directly to USB, 5V or 3V3. Insulate joints, stop if anything warms or irritates skin, and keep this non-waterproof prototype away from sweat and water.
 
-For a design review, verify your actual modules, update dimensions and prices. The repository is currently private; provide reviewers access or make it public before submitting. Program approval and funding are determined by Fallen organizers.
+For a design review, verify your actual modules and update dimensions and prices. Program approval and funding are determined by Fallen organizers.
 
 For a **build submission**, add genuine finished-product photos and a real demo-video link, document measured behavior, and update every source/export to match what was built. None are fabricated here.
 
