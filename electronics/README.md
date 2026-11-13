@@ -25,10 +25,11 @@ scripted schematic, board and libraries; plots must then be regenerated.
 metric Excellon drill exports. The README's PCB and schematic images are
 actual KiCad SVG plots.
 
-KiCad 7 loaded both sources, exported a netlist matching the intended pins and
-reported zero unconnected PCB connections via its connectivity API. This is
-not an ERC/DRC or a fabrication sign-off: run both checks in KiCad, compare
-the netlist, inspect Gerbers in a viewer, confirm manufacturer rules and
-validate actual connector fit before ordering. The modules, 3.3 V assumptions
-and electrical/thermal safety are untested. The alternative perfboard requires
-separate wiring and is not the PCB represented by the Gerbers.
+KiCad 7 loaded both sources and exported a netlist matching the intended pins.
+[CI](../.github/workflows/electronics.yml) runs KiCad 9 ERC and DRC with
+schematic parity; the checks passed with zero violations and unconnected pads.
+This is not a fabrication or safety sign-off: inspect the Gerbers in a viewer,
+confirm manufacturer rules and validate actual connector fit before ordering.
+The modules, 3.3 V assumptions and electrical/thermal safety are untested.
+The alternative perfboard requires separate wiring and is not the PCB
+represented by the Gerbers.

@@ -91,7 +91,7 @@ g++ -std=c++17 -Wall -Wextra -Werror -Itests/stubs tests/firmware_test.cpp -o /t
 /tmp/zoop-test
 ```
 
-CAD and electrical checks and assumptions are documented beside their sources. Passing file/geometry/compile checks does **not** establish physical fit, electrical compatibility, reliable wrist pulse detection, manufacturing acceptance or safe prolonged wear. Complete board retention, wire routing, KiCad ERC/DRC and exact module measurements before calling the design finished.
+The FreeCAD solids and STEP round trips passed geometric checks; KiCad 9 ERC and DRC with schematic parity passed. Details and assumptions are documented beside the sources. Passing these and the firmware compile does **not** establish physical fit, electrical compatibility, reliable wrist pulse detection, manufacturing acceptance or safe prolonged wear. Complete board retention, wire routing and exact module measurements before calling the design finished.
 
 **Not a medical device.** Motion, light, pressure, skin contact and sensor quality can make readings wrong. Do not use ZOOP for diagnosis, treatment, exercise safety decisions or emergencies. Never wear it connected to a mains-powered charger/computer; never connect a bare LiPo directly to USB, 5V or 3V3. Insulate joints, stop if anything warms or irritates skin, and keep this non-waterproof prototype away from sweat and water.
 

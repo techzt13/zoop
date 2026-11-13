@@ -1,6 +1,7 @@
 *.bak
 *.lck
 *.FCStd1
+*.FCBak
 *-backups/
 __pycache__/
 build/
