@@ -48,7 +48,7 @@ The MAX30102 normally uses I²C address `0x57`; grounding MPU6050 AD0 selects `0
 5. For an experimental body-worn test, disconnect the mains-powered computer/charger and use an isolated, protected USB power bank outside the enclosure. Adjust the strap loosely enough for circulation. The current design has no internal battery or charging circuit.
 6. Subscribe to ZOOP's standard BLE heart-rate service with a generic BLE client, or read USB serial for the full pulse/motion stream.
 
-You need access to a soldering iron, solder, wire cutters, a multimeter, measuring tools and a printer or printing service. These tools are not assumed owned or funded; borrow them where possible. Add actual needed tools to the BOM before requesting funds.
+The [BOM](BOM.csv) lists candidate soldering, measuring and assembly tools; borrow them if available and request only what is needed. A computer is assumed for CAD and firmware. Printing service costs still need a quote.
 
 ## Firmware
 
@@ -78,9 +78,11 @@ Over BLE, the device name is **ZOOP**, Heart Rate Service is `0x180D`, and Heart
 
 ## BOM and funding
 
-[BOM.csv](BOM.csv) includes links for every item, the six owned supplies at **$0 requested**, and a **$75.75 proposed build budget** for a perfboard build. Published retail prices are separated from provisional print, hardware and shipping allowances. The optional custom PCB is excluded from the requested total.
+[BOM.csv](BOM.csv) lists the six owned supplies at **$0 requested** and a **$141.69 partial merchandise subtotal** for a perfboard build, including candidate tools not yet confirmed owned. Retail pack sizes and linked prices are shown; the optional custom PCB is excluded.
 
-This is an estimate, not a supplier quote or grant approval. Confirm ownership of the remaining supplies, local pricing, printing costs, shipping, tax and the exact fasteners; reduce the request for anything else already owned. The USB power bank is an external pocket supply, not a Whoop-sized battery, and must be tested for low-current auto-shutoff.
+This is **not a final funding request**: printing the case, lid and optical retainer, shipping, tax and any extra mounting materials are unquoted. Prices are US retail listings found on 2026-11-13, including older search-indexed listings, not live checkout quotes; confirm current prices, availability, local voltage and delivery before ordering. The caliper listing was in-store only. Confirm which tools can be borrowed and request only eligible essentials. Get a print quote after revising the design and obtain checkout totals for the destination.
+
+The Anker power bank is an external pocket supply, not a Whoop-sized battery. Its documented trickle mode is intended for low-power devices but has not been tested with ZOOP; verify continued operation and cable clearance. Computer access for programming is assumed and is not included in the subtotal.
 
 ## Validation and honest limitations
 
