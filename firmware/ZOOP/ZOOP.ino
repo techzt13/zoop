@@ -13,6 +13,7 @@ constexpr int SCL_PIN = 6;
 constexpr uint8_t MPU_ADDR = 0x68;
 constexpr uint32_t CONTACT_THRESHOLD = 50000; // Tune on the actual sensor.
 constexpr uint32_t BEAT_TIMEOUT_MS = 3000;
+constexpr uint32_t SENSOR_TIMEOUT_MS = 1000;
 constexpr uint32_t OUTPUT_PERIOD_MS = 250;
 constexpr uint8_t RATE_COUNT = 4;
 
@@ -24,6 +25,8 @@ uint32_t lastBeat = 0;
 uint32_t lastOutput = 0;
 uint32_t lastNotification = 0;
 uint32_t latestIR = 0;
+uint32_t lastOpticalSample = 0;
+bool opticalStalled = false;
 bool haveBeat = false;
 bool contact = false;
 std::atomic<bool> bleConnected{false};
@@ -92,6 +95,7 @@ void setup() {
   BLEAdvertising *advertising = BLEDevice::getAdvertising();
   advertising->addServiceUUID(BLEUUID(static_cast<uint16_t>(0x180D)));
   advertising->start();
+  lastOpticalSample = millis();
   Serial.println("# Experimental only; BPM is not medically validated");
   Serial.println("ms,ir,contact,bpm,ax_g,ay_g,az_g,gx_dps,gy_dps,gz_dps");
 }
@@ -101,6 +105,9 @@ void loop() {
   wasConnected = bleConnected;
   optical.check();
   while (optical.available()) {
+    lastOpticalSample = millis();
+    if (opticalStalled) Serial.println("# INFO: optical sampling resumed");
+    opticalStalled = false;
     uint32_t sampleTime = millis() - (optical.available() - 1) * 10U;
     latestIR = optical.getFIFOIR();
     contact = latestIR >= CONTACT_THRESHOLD;
@@ -127,6 +134,12 @@ void loop() {
   }
 
   uint32_t now = millis();
+  if (now - lastOpticalSample > SENSOR_TIMEOUT_MS) {
+    if (!opticalStalled) Serial.println("# ERROR: optical samples stalled; check sensor wiring/power");
+    opticalStalled = true;
+    contact = false;
+    resetRates();
+  }
   if (haveBeat && now - lastBeat > BEAT_TIMEOUT_MS) resetRates();
   if (now - lastOutput < OUTPUT_PERIOD_MS) return;
   lastOutput = now;

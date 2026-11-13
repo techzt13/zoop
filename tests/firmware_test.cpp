@@ -39,7 +39,13 @@ int main() {
   assert(haveBeat);
   testTime = 5601;
   loop();
-  assert(!haveBeat && rateSamples == 0);
+  assert(!haveBeat && rateSamples == 0 && !contact && opticalStalled);
+  assert(Serial.output.str().find("ERROR: optical samples stalled") != std::string::npos);
+  optical.samples.push_back(60000);
+  testTime = 5700;
+  loop();
+  assert(!opticalStalled && contact);
+  assert(Serial.output.str().find("INFO: optical sampling resumed") != std::string::npos);
   bleServer->callbacks->onDisconnect(bleServer);
   loop();
   assert(bleServer->advertisingStarts == 1);
