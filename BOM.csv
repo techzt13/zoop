@@ -1,0 +1,16 @@
+item,description,quantity,unit,owned,unit_price_usd,requested_usd,link,notes
+U1,ESP32-S3-Zero development board,1,board,yes,,0,https://www.waveshare.com/esp32-s3-zero.htm,Verify actual maker and pinout
+U2,GY-MAX30102 breakout,1,board,yes,,0,https://www.amazon.com/PAMEENCOS-GY-MAX30102-MAX30102-Concentration-Oximetry/dp/B0D12692LY,Example breakout; verify exact variant and dimensions
+U3,GY-521 MPU6050 breakout,1,board,yes,,0,https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B07RXQGGJX,Example breakout; verify exact variant and dimensions
+SW1,MSK-12C02 slide switch,1,piece,yes,,0,https://www.digikey.com/en/products/detail/shenzhen-shouhan-technology-co-ltd/MSK12C02/30542588,Not connected in current USB-powered prototype; verify actual current rating
+P1,2 x 8 cm perfboard,1,board,yes,,0,https://www.aliexpress.com/wholesale?SearchText=2x8cm+perfboard,For wired prototype; may need cutting
+H1,Black heat shrink tubing,1,piece,yes,,0,https://www.aliexpress.com/wholesale?SearchText=black+heat+shrink+tubing,Use from existing kit
+W1,Insulated hookup wire,1,lot,unknown,,,https://www.adafruit.com/product/1311,Confirm on hand or quote
+HDR,2.54 mm header pins,1,strip,unknown,,,https://www.adafruit.com/product/400,Needed only if using headers; verify fit
+PCB,Custom carrier fabrication,1,lot,unknown,,,https://jlcpcb.com/,Optional alternative to perfboard; final quantity and quote TBD
+CB1,USB-C data cable,1,piece,unknown,,,https://www.adafruit.com/product/4474,For programming and bench testing
+CASE,Printed enclosure material,1,lot,unknown,,,https://www.adafruit.com/product/2060,Example PLA listing discontinued; choose available material and obtain a real quote
+STRAP,Adjustable watch strap,1,piece,unknown,,,https://www.amazon.com/Nylon-Watch-Band-Fasteners-Strap/dp/B0CZ938HF2,Example only; choose after measuring case attachment
+FAST,Enclosure fasteners,1,lot,unknown,,,https://www.adafruit.com/product/3658,Example only; choose sizes and quantities after CAD design
+POWER,Isolated USB power bank,1,piece,unknown,,,https://www.adafruit.com/product/4288,Example only; check size and low-current operation; never connect bare LiPo to 5V
+TOTAL,Funding request excluding unknown items,,,,,TBD,,Sum actual quotes for non-owned items; do not submit TBD

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570">
+<rect width="1000" height="570" fill="#f6f7fb"/>
+<text x="35" y="46" font-family="sans-serif" font-size="26" font-weight="bold">Prototype wiring — check your module labels</text>
+<text x="35" y="75" font-family="sans-serif" font-size="16">Conceptual wiring only; module orientation and pin order are not represented.</text>
+<g font-family="monospace" font-size="19" fill="#1b2430">
+<rect x="50" y="115" width="250" height="320" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+<text x="70" y="150" font-weight="bold">ESP32-S3-Zero</text><text x="70" y="200">3V3</text><text x="70" y="250">GND</text><text x="70" y="300">GPIO5 / SDA</text><text x="70" y="350">GPIO6 / SCL</text><text x="70" y="405">USB-C: 5 V input</text>
+<rect x="680" y="115" width="255" height="185" rx="12" fill="#fce7f3" stroke="#be185d" stroke-width="2"/>
+<text x="700" y="150" font-weight="bold">GY-MAX30102</text><text x="700" y="185">VIN*</text><text x="700" y="215">GND</text><text x="700" y="245">SDA</text><text x="700" y="275">SCL</text>
+<rect x="680" y="330" width="255" height="190" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+<text x="700" y="365" font-weight="bold">GY-521 / MPU6050</text><text x="700" y="395">VCC*</text><text x="700" y="425">GND + AD0</text><text x="700" y="455">SDA</text><text x="700" y="485">SCL</text>
+</g>
+<g fill="none" stroke-width="4">
+<path d="M300 193 H360 V180 H680 M360 193 V390 H680" stroke="#dc2626"/>
+<path d="M300 243 H390 V210 H680 M390 243 V420 H680" stroke="#374151"/>
+<path d="M300 293 H420 V240 H680 M420 293 V450 H680" stroke="#2563eb"/>
+<path d="M300 343 H450 V270 H680 M450 343 V480 H680" stroke="#16a34a"/>
+</g>
+<text x="35" y="550" font-family="sans-serif" font-size="15">*Only if the exact breakout accepts 3.3 V at its input; inspect I²C pull-ups before power-on.</text>
+</svg>

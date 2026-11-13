@@ -1,0 +1,7 @@
+*.bak
+*.lck
+*.FCStd1
+*-backups/
+__pycache__/
+build/
+.DS_Store
