@@ -78,7 +78,7 @@ Over BLE, the device name is **ZOOP**, Heart Rate Service is `0x180D`, and Heart
 
 ## BOM and funding
 
-[BOM.csv](BOM.csv) lists the six owned supplies and existing laptop at **$0 requested**, and a **$161.69 provisional subtotal** for a perfboard build, including candidate tools not yet confirmed owned and a $20 print allowance. Retail pack sizes and linked prices are shown; the optional custom PCB is excluded.
+[BOM.csv](BOM.csv) lists the six owned supplies and existing laptop at **$0 requested**, and a **$163.69 provisional subtotal**, including candidate tools not yet confirmed owned, a $20 print allowance, and $2 for the optional custom PCB. The PCB is an alternative to the owned perfboard; its advertised starting price is not a quote. Retail pack sizes and linked prices are shown.
 
 This is **not a final funding request**: the $20 allowance for printing the case, lid and optical retainer is not a quote and could be too low; shipping, tax and any extra mounting materials are also unquoted. Prices are US retail listings found on 2026-11-13, including older search-indexed listings, not live checkout quotes; confirm current prices, availability, local voltage and delivery before ordering. The caliper listing was in-store only. Confirm which tools can be borrowed and request only eligible essentials. Get a print quote after revising the design and obtain checkout totals for the destination.
 
