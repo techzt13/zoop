@@ -37,7 +37,7 @@ def fp_name(n):
     return f"WireHeader_1x{n:02d}_P2.54mm"
 
 
-def footprint(n, ref=None, x=0, nets=None):
+def footprint(n, ref=None, x=0, nets=None, value=None):
     name = fp_name(n)
     if ref is None:
         head = f'(footprint "{name}" (version 20221018) (generator wristband_script)\n  (layer "F.Cu")'
@@ -49,7 +49,7 @@ def footprint(n, ref=None, x=0, nets=None):
     out = [head + pos,
            f'  (attr through_hole)',
            f'  (fp_text reference "{ref}" (at 0 -2.5) (layer "F.SilkS") (effects (font (size 1 1) (thickness 0.15))))',
-           f'  (fp_text value "{name}" (at 0 {2.54*(n-1)+2.5:.2f}) (layer "F.Fab") hide (effects (font (size 1 1) (thickness 0.15))))']
+           f'  (fp_text value "{value or name}" (at 0 {2.54*(n-1)+2.5:.2f}) (layer "F.Fab") hide (effects (font (size 1 1) (thickness 0.15))))']
     for i in range(n):
         net = "" if nets is None else f' (net {netids[nets[i]]} "/{nets[i]}")'
         out.append(f'  (pad "{i+1}" thru_hole {"rect" if i == 0 else "circle"} '
@@ -71,7 +71,7 @@ board = ['(kicad_pcb (version 20221018) (generator wristband_script)',
          '  (setup (pad_to_mask_clearance 0))',
          '  (net 0 "")']
 board += [f'  (net {number} "/{name}")' for name, number in netids.items()]
-board += [footprint(len(nets), ref, x, nets) for ref, _, x, nets in headers]
+board += [footprint(len(nets), ref, x, nets, value) for ref, value, x, nets in headers]
 for i, (start, end, layer, net) in enumerate(tracks):
     board.append(f'  (segment (start {start[0]} {start[1]:.2f}) (end {end[0]} {end[1]:.2f}) (width 0.5) (layer "{layer}") (net {netids[net]}) (tstamp {uid("trace"+str(i))}))')
 for i, (a, b) in enumerate([((0, 0), (WIDTH, 0)), ((WIDTH, 0), (WIDTH, HEIGHT)),
@@ -80,7 +80,7 @@ for i, (a, b) in enumerate([((0, 0), (WIDTH, 0)), ((WIDTH, 0), (WIDTH, HEIGHT)),
 for ref, _, x, nets in headers:
     for i, net in enumerate(nets):
         label = "AD0=GND" if ref == "J3" and i == 4 else net
-        board.append(f'  (gr_text "{label}" (at {x + 1.4} {rows[i]:.2f}) (layer "F.SilkS") (tstamp {uid(ref+"silk"+str(i))}) (effects (font (size 0.7 0.7) (thickness 0.12)) (justify left)))')
+        board.append(f'  (gr_text "{label}" (at {x + 1.4} {rows[i]:.2f}) (layer "F.SilkS") (tstamp {uid(ref+"silk"+str(i))}) (effects (font (size 0.8 0.8) (thickness 0.12)) (justify left)))')
 write(f"{NAME}.kicad_pcb", "\n".join(board) + "\n)\n")
 
 sheet_id = uid("sheet")
