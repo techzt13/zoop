@@ -1,3 +1,11 @@
+---
+title: "ZOOP"
+github: "techzt13/zoop"
+description: "An experimental DIY fitness band built with an ESP32-S3 and pulse and motion sensors."
+created_at: "2026-03-20"
+total_time: "6.47h"
+---
+
 # ZOOP Journal
 
 ## Entry 1 — The idea and parts
@@ -114,7 +122,7 @@ After funding and construction, the next stage will be testing the electronics o
 
 ![CAD assembly render](images/cad-assembly.png)
 
-**Time spent:** Not provided
+**Time spent:** 5.17 hours
 
 ## Entry 2 — BOM update
 
@@ -132,4 +140,4 @@ The enclosure remains a draft based on approximate module dimensions. I can’t 
 
 ![CAD assembly render](images/cad-assembly.png)
 
-**Time spent:** Not provided
+**Time spent:** 1.3 hours
