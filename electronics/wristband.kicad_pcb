@@ -62,5 +62,5 @@
   (gr_text "GND" (at 38.4 6.54) (layer "F.SilkS") (tstamp 7a69598b-7c3d-5d4e-a5cf-2022217ac6ec) (effects (font (size 0.8 0.8) (thickness 0.12)) (justify left)))
   (gr_text "SDA" (at 38.4 9.08) (layer "F.SilkS") (tstamp 86113884-2e13-5231-a216-dfdd778b06ec) (effects (font (size 0.8 0.8) (thickness 0.12)) (justify left)))
   (gr_text "SCL" (at 38.4 11.62) (layer "F.SilkS") (tstamp 89b279e6-563e-5115-b101-31bb6f07a07b) (effects (font (size 0.8 0.8) (thickness 0.12)) (justify left)))
-  (gr_text "AD0=GND" (at 38.4 14.16) (layer "F.SilkS") (tstamp 1beac924-0abb-59ca-9666-126b7668bac0) (effects (font (size 0.8 0.8) (thickness 0.12)) (justify left)))
+  (gr_text "AD0" (at 38.4 14.16) (layer "F.SilkS") (tstamp 1beac924-0abb-59ca-9666-126b7668bac0) (effects (font (size 0.8 0.8) (thickness 0.12)) (justify left)))
 )

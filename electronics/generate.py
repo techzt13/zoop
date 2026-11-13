@@ -79,7 +79,7 @@ for i, (a, b) in enumerate([((0, 0), (WIDTH, 0)), ((WIDTH, 0), (WIDTH, HEIGHT)),
     board.append(f'  (gr_line (start {a[0]} {a[1]}) (end {b[0]} {b[1]}) (stroke (width 0.05) (type default)) (layer "Edge.Cuts") (tstamp {uid("edge"+str(i))}))')
 for ref, _, x, nets in headers:
     for i, net in enumerate(nets):
-        label = "AD0=GND" if ref == "J3" and i == 4 else net
+        label = "AD0" if ref == "J3" and i == 4 else net
         board.append(f'  (gr_text "{label}" (at {x + 1.4} {rows[i]:.2f}) (layer "F.SilkS") (tstamp {uid(ref+"silk"+str(i))}) (effects (font (size 0.8 0.8) (thickness 0.12)) (justify left)))')
 write(f"{NAME}.kicad_pcb", "\n".join(board) + "\n)\n")
 
