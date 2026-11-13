@@ -1,0 +1,2 @@
+import os
+exec(compile(open(os.path.join(os.getcwd(), 'build_concept.py')).read(), 'build_concept.py', 'exec'))

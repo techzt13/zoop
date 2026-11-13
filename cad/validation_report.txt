@@ -1,0 +1,17 @@
+FreeCAD 1.1.4 kernel solid and STEP checks
+Units: mm, mm^3; assembled coordinates, including fastener and strap placeholders.
+CaseBase: valid; 1 solid; volume 12101.7322; STEP reimport 12101.7322
+Lid: valid; 1 solid; volume 4462.4419; STEP reimport 4462.4419
+Carrier: valid; 1 solid; volume 1267.2000; STEP reimport 1267.2000
+OpticalRetainer: valid; 1 solid; volume 37.9080; STEP reimport 37.9080
+ESP: valid; 1 solid; volume 835.0800; STEP reimport 835.0800
+GY521: valid; 1 solid; volume 558.8000; STEP reimport 558.8000
+MAX30102: valid; 1 solid; volume 361.4440; STEP reimport 361.4440
+LeftStrap: valid; 1 solid; volume 1188.0000; STEP reimport 1188.0000
+RightStrap: valid; 1 solid; volume 1188.0000; STEP reimport 1188.0000
+Screw1: valid; 1 solid; volume 33.9669; STEP reimport 33.9669
+Screw2: valid; 1 solid; volume 33.9669; STEP reimport 33.9669
+Screw3: valid; 1 solid; volume 33.9669; STEP reimport 33.9669
+Screw4: valid; 1 solid; volume 33.9669; STEP reimport 33.9669
+Assembly STEP: valid; 13 solids
+Pairwise positive-volume intersections > 0.000001 mm^3: 0

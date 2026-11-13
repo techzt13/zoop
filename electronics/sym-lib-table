@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "Wristband")(type "KiCad")(uri "${KIPRJMOD}/Wristband.kicad_sym")(options "")(descr "Generic wire headers"))
+)

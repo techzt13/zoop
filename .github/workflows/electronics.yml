@@ -1,0 +1,36 @@
+name: ZOOP electronics checks
+
+on:
+  push:
+    paths:
+      - electronics/**
+      - .github/workflows/electronics.yml
+  pull_request:
+    paths:
+      - electronics/**
+      - .github/workflows/electronics.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  electrical:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install KiCad
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends kicad
+          kicad-cli version
+      - name: Check schematic and PCB
+        working-directory: electronics
+        run: |
+          set +e
+          kicad-cli sch erc --exit-code-violations -o "$RUNNER_TEMP/erc.rpt" wristband.kicad_sch
+          erc=$?
+          kicad-cli pcb drc --schematic-parity --exit-code-violations -o "$RUNNER_TEMP/drc.rpt" wristband.kicad_pcb
+          drc=$?
+          cat "$RUNNER_TEMP/erc.rpt" "$RUNNER_TEMP/drc.rpt"
+          test "$erc" = 0 && test "$drc" = 0
