@@ -130,9 +130,15 @@ After funding and construction, the next stage will be testing the electronics o
 
 **What I did:**
 
+### Product research
+
 ZOOP’s original BOM had rough allowances for the enclosure, screws, shipping, and tax. With Copilot’s help, the BOM was revised to link specific products and prices for wire, a USB cable, a power bank, strap materials, screws, and candidate assembly tools.
 
+### Costs and power bank
+
 The listed merchandise subtotal is $141.69, but that isn’t the final build cost. Printing, shipping, tax, and any extra mounting materials still need quotes. The selected power bank has a low-current mode, although it hasn’t been tested with ZOOP yet.
+
+### Enclosure and parts on hand
 
 The enclosure remains a draft based on approximate module dimensions. I can’t measure the parts yet, so the fit, mounting, and wiring will need to be checked once they’re available. The BOM currently marks six parts as owned; that needs correcting if they aren’t actually available.
 
