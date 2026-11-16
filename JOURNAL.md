@@ -26,8 +26,6 @@ I collected the design-submission requirements: a clear README, assembly and ele
 
 There was initially confusion about whether the project needed to be built before requesting funding. I clarified that Fallen funds designs before construction. Finished-product photos and a demo video are therefore for the later build submission, not this design submission.
 
-AI-use eligibility also came up during research. I stated that AI assistance is allowed for my project, and the documentation identifies the assistance rather than presenting generated work as entirely manual.
-
 ### Electrical design
 
 The proposed wiring uses a shared I²C bus:
