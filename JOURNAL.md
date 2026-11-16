@@ -144,11 +144,33 @@ The enclosure remains a draft based on approximate module dimensions. I can’t 
 
 ## Entry 3 — Software development
 
-**Date:** 2026-11-15
+**Date:** 2026-11-16
 
 **What I did:**
 
-I spent 12 hours working on the software for the project.
+Today I spent 12 hours working on ZOOP’s software. My goal was to bring the pulse and motion sensors together on the ESP32-S3 and make their readings available over USB and Bluetooth. I also wanted the firmware to handle missing or unreliable readings rather than continuing to display an old heart-rate estimate.
+
+### Reading the sensors
+
+The MAX30102 and MPU6050 share an I²C bus. The firmware uses SparkFun’s MAX3010x library to read infrared samples from the optical sensor and its beat-detection function to calculate an experimental pulse estimate. It also reads acceleration and rotation from the MPU6050, reporting acceleration in g and angular velocity in degrees per second.
+
+The pulse contact threshold is still an initial assumption. It needs to be calibrated and tested with the actual sensor, especially because wrist movement, ambient light, and sensor placement can affect the readings.
+
+### Sharing the data
+
+For USB, the firmware outputs CSV containing elapsed time, infrared readings, a contact flag, estimated BPM, and motion data. This should make it easier to inspect the raw signal alongside the estimated pulse when testing begins.
+
+For Bluetooth, ZOOP advertises using the standard Heart Rate Service, so a generic BLE client can subscribe to approximate BPM notifications. Motion data is currently available over USB only.
+
+### Handling errors and stale readings
+
+The firmware clears or invalidates the pulse estimate when contact is lost, a beat interval is implausible, or optical sampling stalls. It also reports sensor initialization and MPU6050 read errors. Bluetooth advertising restarts after a client disconnects so another connection can be made.
+
+### Checks and next steps
+
+The software has been checked with host-side simulations and an ESP32-S3 firmware compile. The simulations cover cases such as pulse averaging, contact loss, stalled samples, Bluetooth notifications, and I²C errors. These checks are useful, but they do not prove that the sensors will work correctly in the finished band.
+
+I haven’t tested the firmware on the completed device because the project is still awaiting a funding decision and I don’t have the remaining parts needed to assemble it. Once I can build it, I’ll check that both sensors initialize, inspect the USB data, test the Bluetooth connection, and tune the pulse detection before trying wrist measurements. ZOOP remains experimental and its readings won’t be used for medical decisions.
 
 **Photos:** Not provided
 
