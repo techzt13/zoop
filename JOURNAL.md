@@ -172,6 +172,8 @@ The software has been checked with host-side simulations and an ESP32-S3 firmwar
 
 I haven’t tested the firmware on the completed device because the project is still awaiting a funding decision and I don’t have the remaining parts needed to assemble it. Once I can build it, I’ll check that both sensors initialize, inspect the USB data, test the Bluetooth connection, and tune the pulse detection before trying wrist measurements. ZOOP remains experimental and its readings won’t be used for medical decisions.
 
-**Photos:** Not provided
+**Photos:** Firmware source screenshot.
+
+![ZOOP firmware source code](images/firmware-code-screenshot.png)
 
 **Time spent:** 12 hours
