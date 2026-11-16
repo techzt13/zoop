@@ -46,7 +46,7 @@ For the first version, power comes through USB. An external protected USB power 
 
 ### Firmware development
 
-Copilot generated Arduino firmware for the ESP32-S3. It reads infrared samples from the MAX30102 and acceleration and rotation from the MPU6050.
+I developed the Arduino firmware for the ESP32-S3 with AI assistance. It reads infrared samples from the MAX30102 and acceleration and rotation from the MPU6050.
 
 The firmware uses SparkFun’s MAX3010x library and its beat-detection function. It produces USB serial CSV containing elapsed time, raw infrared readings, a provisional contact flag, estimated BPM, acceleration in g and angular velocity in degrees per second.
 
@@ -132,7 +132,7 @@ After funding and construction, the next stage will be testing the electronics o
 
 ### Product research
 
-ZOOP’s original BOM had rough allowances for the enclosure, screws, shipping, and tax. With Copilot’s help, the BOM was revised to link specific products and prices for wire, a USB cable, a power bank, strap materials, screws, and candidate assembly tools.
+ZOOP’s original BOM had rough allowances for the enclosure, screws, shipping, and tax. I used AI assistance while revising the BOM to link specific products and prices for wire, a USB cable, a power bank, strap materials, screws, and candidate assembly tools.
 
 ### Costs and power bank
 
