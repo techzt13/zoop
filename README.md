@@ -24,7 +24,7 @@ The [KiCad project](electronics/wristband.kicad_pro), [schematic](electronics/wr
 
 ### Wiring
 
-![Logical module wiring](images/wiring.svg)
+![Prototype wiring](images/wiring.png)
 
 With power disconnected, wire by the **labels on your exact modules**:
 
