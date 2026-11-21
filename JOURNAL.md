@@ -181,3 +181,43 @@ I haven’t tested the firmware on the completed device because the project is s
 ![ZOOP firmware source code](images/firmware-code-screenshot.png)
 
 **Time spent:** 12 hours
+
+## Entry 4 - Editing and debugging ZOOP’s firmware
+
+**Date:** 2026-11-21
+
+**What I did:**
+
+This session was all about going back through ZOOP’s firmware, cleaning it up, and finding problems before I have the hardware to test it on.
+
+### Firmware review
+
+I read through the main sketch, `firmware/ZOOP/ZOOP.ino`, to make sure I understood how each part fits together: starting the I²C bus on GPIO5 and GPIO6, setting up the MAX30102 and MPU6050, reading samples, estimating BPM, and sending data over USB and Bluetooth.
+
+The firmware review also confirmed the shared-bus assumptions in the sketch and the documentation. The MAX30102 and MPU6050 are addressed through the same Wire interface, with the ESP32-S3-Zero using SDA on GPIO5 and SCL on GPIO6.
+
+### Bugs and problems
+
+The main startup issue is that ZOOP currently halts when either the MAX30102 or MPU6050 is not detected. That makes it important to distinguish a missing or miswired sensor from an incorrect I²C setup before assembly testing begins.
+
+I confirmed that the ESP32-S3-Zero needs `Wire.begin(SDA_PIN, SCL_PIN, 100000)` or the equivalent I²C pin setup before the sensors start. In this sketch, that setup appears at startup before both sensor initialization routines.
+
+The SparkFun example’s 5 V wiring notes do not appear to match the GY-MAX30102 board. I need to verify the actual board’s supply and I²C voltage limits before powering it. The ESP32-S3 is 3.3 V, so I should not assume that every similarly named MAX30102 breakout uses the same regulator or pull-up arrangement.
+
+The skin-contact threshold of 50000 is only an initial guess. It has not been tuned on a real wrist and needs to be checked against ambient light, sensor placement, skin tone, pressure, and whether the band is worn loosely or tightly.
+
+Wrist movement is likely to distort the optical pulse estimate. The MPU6050 reading will be needed to flag or filter motion, rather than assuming that every apparent optical beat is a valid pulse reading.
+
+### How I checked it
+
+I can’t test on the real band yet because the project is still waiting on funding and I don’t have the remaining parts to assemble it. Instead, I reviewed the startup sequence, I²C configuration, sensor initialization checks, and pulse-estimation logic in the sketch.
+
+These checks show how the code is intended to behave and help identify hardware assumptions before assembly. They do not prove that the sensors will detect correctly or produce accurate readings on a wrist.
+
+### Next steps
+
+Once I have everything, I’ll start with a fingertip test on the MAX30102, then check the MPU6050, then try a resting wrist reading. After that, I’ll tune the contact threshold and test how much movement affects the pulse estimate.
+
+**Photos:** [Add screenshots of the code or compile results.]
+
+**Time spent:** 5 hours 34 minutes
