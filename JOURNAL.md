@@ -218,6 +218,8 @@ These checks show how the code is intended to behave and help identify hardware 
 
 Once I have everything, I’ll start with a fingertip test on the MAX30102, then check the MPU6050, then try a resting wrist reading. After that, I’ll tune the contact threshold and test how much movement affects the pulse estimate.
 
-**Photos:** [Add screenshots of the code or compile results.]
+**Photos:** Firmware source screenshot.
+
+![ZOOP firmware source code](images/firmware-code-screenshot.png)
 
 **Time spent:** 5 hours 34 minutes
