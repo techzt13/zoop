@@ -15,7 +15,11 @@ holes are included. Modules and their wiring remain external to the PCB.
 Pin 1 is the square pad. Check actual breakout regulator and pull-up
 configuration before connecting: inputs vary and SDA/SCL must not rise above
 the ESP32's 3.3 V logic rail. Verify the combined pull-up resistance, the sensor
-input supplies and ESP regulator current margin. USB powers the ESP32 only.
+input supplies and ESP regulator current margin. For the proposed battery
+mode an external charger/regulator supplies the 3.3 V rail; it is not shown
+on this schematic or carrier PCB. Do not connect ESP32 USB while the external
+3.3 V supply is connected: the supplies can backfeed. See the main README
+for source separation and battery charge-current precautions.
 With power disconnected, use a multimeter to confirm all nets and no shorts.
 
 `wristband.kicad_pro`, `.kicad_sch`, `.kicad_pcb`, `.kicad_prl`, local symbol

@@ -34,7 +34,7 @@ def add(name, label, shape, color, transparency=0):
 
 def main():
     # The enclosure is one connected print.  The four pillars blend into the wall.
-    base = box(-29,-18,0,29,18,15).cut(box(-27,-16,2,27,16,15.1))
+    base = box(-29,-22,0,29,22,32).cut(box(-27,-20,2,27,20,32.1))
     ears = [box(-39,-12,0,-29,12,4), box(29,-12,0,39,12,4)]
     rails = [box(-23,-10,2,23,-8.15,6), box(-23,8.15,2,23,10,6)]
     guides = [box(4,y0,z0,17,y1,z1)
@@ -43,22 +43,20 @@ def main():
     stops = [box(17,y0,2,17.8,y1,5.5) for y0,y1 in
              [(-8.15,-7.5),(7.5,8.15)]]
     stops.append(box(3,-7,2,3.9,7,3.4))
-    pillars = [cylinder(x,y,2,3.2,13) for x in (-25,25) for y in (-13,13)]
+    pillars = [cylinder(x,y,2,3.2,30) for x in (-25,25) for y in (-13,13)]
     base = fused([base] + ears + rails + guides + stops + pillars)
     for cut in [box(-35.5,-9.8,-1,-32,9.8,5),box(32,-9.8,-1,35.5,9.8,5),
                 box(7,-2.8,-1,15,2.8,2.1),box(-30,-6,8.5,-26,6,13)]:
         base = base.cut(cut)
     positions = [(x,y) for x in (-25,25) for y in (-13,13)]
     for x,y in positions:
-        base = base.cut(cylinder(x,y,7,1,8.1))
+        base = base.cut(cylinder(x,y,24,1,8.1))
     base = base.removeSplitter()
     shell = add('CaseBase','01 Case base, rails and optical guides',base,(0.68,0.74,0.81))
-    lidshape = fused([box(-29,-18,15,29,18,17)] +
-                    [box(x0,y0,7.6,x1,y1,15) for x0,x1 in [(-20,-14),(14,20)]
-                     for y0,y1 in [(-10.2,-8.4),(8.4,10.2)]])
+    lidshape = box(-29,-22,32,29,22,34)
     for x,y in positions:
-        lidshape = lidshape.cut(cylinder(x,y,14.9,1.15,2.2))
-    lid = add('Lid','02 Lid with carrier edge keepers',lidshape.removeSplitter(),(0.82,0.87,0.93),65)
+        lidshape = lidshape.cut(cylinder(x,y,31.9,1.15,2.2))
+    lid = add('Lid','02 Lid - carrier retention not yet designed',lidshape.removeSplitter(),(0.82,0.87,0.93),65)
     carrier = add('Carrier','03 Carrier 44 x 18 x 1.6 placeholder',box(-22,-9,6,22,9,7.6),(0.68,0.41,0.20))
     add('OpticalRetainer','03b Optical slide stop (print separately)',box(3,-8.1,3.4,3.9,8.1,6),(0.90,0.65,0.15))
     esp = fused([box(-22,-8.4,7.6,1.5,8.4,9.2),box(-14,-4,9.2,-7,4,11.0),
@@ -68,6 +66,8 @@ def main():
     add('GY521','05 GY-521 placeholder',gyro,(0.16,0.65,0.67))
     optical = fused([box(4,-8,3.4,17,8,5),box(8,-1.65,1.85,13.6,1.65,3.4)])
     add('MAX30102','06 MAX30102 breakout and sensor placeholder',optical,(0.60,0.29,0.64))
+    add('Battery','06b 500mAh battery envelope - no leads',box(-14.5,-18,14,14.5,18,18.75),(0.85,0.85,0.80))
+    add('PowerModule','06c Charger and buck envelope - no connector clearance',box(-15.1,-9.5,20,15.1,9.5,30),(0.20,0.50,0.30))
     for sign, name in [(-1,'LeftStrap'),(1,'RightStrap')]:
         # Folded geometry is a short representational sample, not the full strap.
         def sb(x0,y0,z0,x1,y1,z1):
@@ -78,7 +78,7 @@ def main():
         add(name,'07 '+name+' folded 18 mm fabric sample',strip,(0.19,0.25,0.32))
     screws=[]
     for i,(x,y) in enumerate(positions,1):
-        screw = fused([cylinder(x,y,9,0.9,8),cylinder(x,y,17,1.9,1.2)])
+        screw = fused([cylinder(x,y,26,0.9,8),cylinder(x,y,34,1.9,1.2)])
         screws.append(add('Screw%d'%i,'08 M2 x 8 pan screw %d envelope'%i,screw,(0.55,0.57,0.61)))
     doc.recompute()
     objs = list(doc.Objects)

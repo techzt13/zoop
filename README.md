@@ -4,7 +4,7 @@
 
 ZOOP is an original, Whoop-inspired experiment built around an ESP32-S3-Zero, a GY-MAX30102 optical pulse sensor and a GY-521 motion sensor. It streams an experimental heart-rate estimate over Bluetooth and pulse/motion data over USB. The goal is to understand wearable sensing using parts already on hand, rather than paying for a closed subscription.
 
-**Design submission, not a finished build.** Dimensions for the actual modules still need measurement, and the device has not been assembled or tested on a wrist. ZOOP is independent of Whoop: it does not copy proprietary software, work with the Whoop app, or promise equivalent accuracy, battery life, sleep staging, recovery or strain scores.
+**Design submission, not a finished build.** The rechargeable on-band power system and enlarged case are concepts, not a tested or wearable-ready assembly. Dimensions for the actual modules still need measurement, and the device has not been assembled or tested on a wrist. ZOOP is independent of Whoop: it does not copy proprietary software, work with the Whoop app, or promise equivalent accuracy, battery life, sleep staging, recovery or strain scores.
 
 ## Full 3D assembly
 
@@ -26,7 +26,7 @@ The [KiCad project](electronics/wristband.kicad_pro), [schematic](electronics/wr
 
 ![Prototype wiring](images/wiring.png)
 
-With power disconnected, wire by the **labels on your exact modules**:
+This earlier image shows the USB-powered sensor prototype, **not the rechargeable power system**. With power disconnected, wire sensors by the **labels on your exact modules**:
 
 | ESP32-S3-Zero | GY-MAX30102 | GY-521 |
 |---|---|---|
@@ -35,17 +35,27 @@ With power disconnected, wire by the **labels on your exact modules**:
 | GPIO5 | SDA | SDA |
 | GPIO6 | SCL | SCL |
 
-The MAX30102 normally uses I²C address `0x57`; grounding MPU6050 AD0 selects `0x68`. Leave unused INT, XDA, XCL and other signals disconnected. The MSK-12C02 is listed as owned but **unused**: disconnect USB to turn this prototype off. Some versions are rated only 50 mA and must not switch ESP32 power directly.
+The MAX30102 normally uses I²C address `0x57`; grounding MPU6050 AD0 selects `0x68`. Leave unused INT, XDA, XCL and other signals disconnected. The MSK-12C02 is listed as owned but **unused**: unplugging USB alone will not turn off a battery-powered circuit. Some versions are rated only 50 mA and must not switch ESP32 power directly.
 
 **Breakout variants differ.** Inspect the actual regulators, LED supply and I²C pull-ups. SDA/SCL must not be pulled to 5 V, and the combined pull-up resistance must be suitable for the shared bus. Some GY-521 regulators will not operate reliably from a 3.3 V input. If either module cannot accept the assumed supply, revise the wiring and schematic before powering it; do not infer safety from its marketplace name.
+
+### Rechargeable power concept
+
+![Unverified rechargeable power concept](images/power-concept.svg)
+
+The proposed on-band supply is a protected [500 mAh LiPo](https://www.adafruit.com/product/1578) and [bq25185 charger/3.3 V buck board](https://www.adafruit.com/product/6092). Before connecting the battery, set the charger's current to **500 mA**, following the [manufacturer's guide](https://learn.adafruit.com/adafruit-bq25185-usb-dc-solar-charger-with-3-3v-buck-board/overview): its default 1 A exceeds this battery's specified maximum. Verify the battery connector polarity; JST connectors from other suppliers can be reversed.
+
+The intended battery-powered configuration is the charger board's **3.3 V output** to the ESP32 3V3 and sensor 3.3 V rail, with grounds common. Never connect the battery to the ESP32 or 3.3 V rail directly. The charger output can fall to 3.0 V as the battery empties; operation, brownout behavior and runtime with the actual boards are untested. The existing carrier schematic is a signal distribution board only: it does **not** show or include the charger, battery, source selection or protection.
+
+**Do not connect ESP32 USB while the charger 3.3 V output is connected to its 3V3 pin:** the two supplies may backfeed. For programming or USB serial, disconnect the charger output from the ESP32 rail first; for battery operation, unplug ESP32 USB before reconnecting it. Use a removable, insulated connection until a properly engineered power-path selector is designed. Charge off-body, with the ESP32 USB disconnected, and never wear it connected to a computer or mains charger. The existing 50 mA switch is not specified to switch the load safely.
 
 ## Build and use
 
 1. Measure board outlines, thicknesses, header orientation, sensor position and USB plug clearance. Adjust the CAD parameters and regenerate exports before printing. Verify the actual electrical requirements above.
 2. Choose **one** carrier: cut the owned perfboard to the modeled envelope, or order the checked custom PCB. Use insulated wires, trim header pins for clearance and label both ends. Check continuity and shorts with power disconnected.
-3. Print and assemble using the [CAD instructions](cad/README.txt). The case has a carrier support and optical guide, but the ESP32 and GY-521 do not yet have modeled mechanical fasteners, and the optical retainer needs verification. Design and verify secure retention for all boards and the strap. The optical window must face the skin; validate retention and ambient-light shielding rather than covering the sensor lens with opaque material.
+3. Before printing, finish the [CAD design](cad/README.txt): the larger case only includes battery and charger reference envelopes. It lacks secure retention, charger port access, wiring and adequate verified battery clearances. The carrier, ESP32 and GY-521 also need verified fasteners. The optical window must face the skin; validate retention and ambient-light shielding rather than covering the sensor lens with opaque material.
 4. Compile and upload the firmware below. First test the electronics off-body on USB. Confirm both sensors initialize and that the optical stream changes when a stationary finger is placed over the lens.
-5. For an experimental body-worn test, disconnect the mains-powered computer/charger and use an isolated, protected USB power bank outside the enclosure. Adjust the strap loosely enough for circulation. The current design has no internal battery or charging circuit.
+5. Only after the power circuit, enclosure and retention have been checked, disconnect all external power for an experimental body-worn test. Adjust the strap loosely enough for circulation. Do not wear the current concept.
 6. Subscribe to ZOOP's standard BLE heart-rate service with a generic BLE client, or read USB serial for the full pulse/motion stream.
 
 The [BOM](BOM.csv) lists purchased soldering and measuring tools and remaining candidate assembly tools; borrow tools if available and request only what is needed. The existing Mac laptop is used for CAD and firmware. Printing service costs still need a quote.
@@ -78,11 +88,11 @@ Over BLE, the device name is **ZOOP**, Heart Rate Service is `0x180D`, and Heart
 
 ## BOM and funding
 
-[BOM.csv](BOM.csv) lists the six owned supplies, existing laptop, and purchased wire, soldering kit and multimeter at **$0 requested**. The remaining provisional subtotal is **$105.80**, including candidate tools not yet confirmed owned, a $20 print allowance, and $2 for the optional custom PCB. The PCB is an alternative to the owned perfboard; its advertised starting price is not a quote. Retail pack sizes and linked prices are shown.
+[BOM.csv](BOM.csv) lists the owned supplies, cable and laptop, and purchased wire, soldering kit and multimeter at **$0 requested**. The remaining provisional subtotal is **$91.76**, including the proposed battery and charger, candidate tools not yet confirmed owned, a $20 print allowance, and $2 for the optional custom PCB. The PCB is an alternative to the owned perfboard; its advertised starting price is not a quote. Retail pack sizes and linked prices are shown.
 
-This is **not a final funding request**: the $20 allowance for printing the case, lid and optical retainer is not a quote and could be too low; shipping, tax and any extra mounting materials are also unquoted. Prices are US retail listings found on 2026-11-13, including older search-indexed listings, not live checkout quotes; confirm current prices, availability, local voltage and delivery before ordering. The caliper listing was in-store only. Confirm which tools can be borrowed and request only eligible essentials. Get a print quote after revising the design and obtain checkout totals for the destination.
+This is **not a final funding request**: the $20 allowance for printing the case, lid and optical retainer is not a quote and could be too low; shipping, tax and any extra mounting materials are also unquoted. Prices are dated US retail listings, including older search-indexed listings, not live checkout quotes; confirm current prices, availability, local voltage and delivery before ordering. The caliper listing was in-store only. Confirm which tools can be borrowed and request only eligible essentials. Get a print quote after revising the design and obtain checkout totals for the destination.
 
-The Anker power bank is an external pocket supply, not a Whoop-sized battery. Its documented trickle mode is intended for low-power devices but has not been tested with ZOOP; verify continued operation and cable clearance.
+The battery power concept and its enlarged enclosure have not been tested and are not Whoop-sized. Do not order a case print until the mechanical and electrical design is complete.
 
 ## Validation and honest limitations
 
@@ -95,7 +105,7 @@ g++ -std=c++17 -Wall -Wextra -Werror -Itests/stubs tests/firmware_test.cpp -o /t
 
 The FreeCAD solids and STEP round trips passed geometric checks; KiCad 9 ERC and DRC with schematic parity passed. Details and assumptions are documented beside the sources. Passing these and the firmware compile does **not** establish physical fit, electrical compatibility, reliable wrist pulse detection, manufacturing acceptance or safe prolonged wear. Complete board retention, wire routing and exact module measurements before calling the design finished.
 
-**Not a medical device.** Motion, light, pressure, skin contact and sensor quality can make readings wrong. Do not use ZOOP for diagnosis, treatment, exercise safety decisions or emergencies. Never wear it connected to a mains-powered charger/computer; never connect a bare LiPo directly to USB, 5V or 3V3. Insulate joints, stop if anything warms or irritates skin, and keep this non-waterproof prototype away from sweat and water.
+**Not a medical device.** Motion, light, pressure, skin contact and sensor quality can make readings wrong. Do not use ZOOP for diagnosis, treatment, exercise safety decisions or emergencies. Never wear it connected to a mains-powered charger/computer; never connect a LiPo directly to USB, 5V or 3V3. Protect the cell from puncture, crushing, heat and shorts; insulate joints, stop if anything warms or irritates skin, and keep this non-waterproof prototype away from sweat and water.
 
 For a design review, verify your actual modules and update dimensions and prices. Program approval and funding are determined by Fallen organizers.
 
