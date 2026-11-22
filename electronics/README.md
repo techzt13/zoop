@@ -1,7 +1,8 @@
 # ZOOP experimental wire-header carrier
 
-This 44 × 18 mm custom PCB is an alternative to the hand-wired perfboard, not
-an ESP32 or sensor module replacement. Each module is wired to its corresponding
+This 44 × 18 mm custom PCB is an earlier reference design and is not being
+ordered for the build, which uses owned perfboard. It is not an ESP32 or sensor
+module replacement. Each module is wired to its corresponding
 header; header pin numbers are not the module pin order. No module footprints,
 power switch, charger, protection circuit, battery, sensor pull-ups or mounting
 holes are included. Modules and their wiring remain external to the PCB.

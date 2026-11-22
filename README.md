@@ -14,13 +14,7 @@ Open the [FreeCAD assembly](cad/ZOOP_assembly.FCStd). [Assembly STEP](cad/assemb
 
 ## Electronics
 
-![ZOOP PCB layout](images/pcb.svg)
-
-![ZOOP schematic](images/schematic.svg)
-
-The compact carrier distributes four signals to wire headers: 3.3 V, GND, SDA and SCL. It is an **alternative** to cutting and hand-wiring the owned perfboard, not a custom replacement for the sensor modules. Header numbers are carrier positions, not the modules' physical pin order.
-
-The [KiCad project](electronics/wristband.kicad_pro), [schematic](electronics/wristband.kicad_sch), [PCB](electronics/wristband.kicad_pcb), local settings, libraries and [Gerber ZIP](electronics/gerbers.zip) are in [electronics/](electronics/README.md). The images are generated from the actual design, not build photos. Read the electrical validation and manufacturing limitations before ordering.
+The build uses the owned **perfboard**, not an ordered PCB. An earlier [custom carrier design](electronics/README.md) is retained for reference but is not part of the build or the purchase request.
 
 ### Wiring
 
@@ -52,13 +46,22 @@ The intended battery-powered configuration is the charger board's **3.3 V output
 ## Build and use
 
 1. Measure board outlines, thicknesses, header orientation, sensor position and USB plug clearance. Adjust the CAD parameters and regenerate exports before printing. Verify the actual electrical requirements above.
-2. Choose **one** carrier: cut the owned perfboard to the modeled envelope, or order the checked custom PCB. Use insulated wires, trim header pins for clearance and label both ends. Check continuity and shorts with power disconnected.
+2. Use the owned perfboard as the carrier; do not cut it until the fit and hole positions are verified. Use insulated wires, trim header pins for clearance and label both ends. Check continuity and shorts with power disconnected.
 3. Before printing, finish the [CAD design](cad/README.txt): the larger case only includes battery and charger reference envelopes. It lacks secure retention, charger port access, wiring and adequate verified battery clearances. The carrier, ESP32 and GY-521 also need verified fasteners. The optical window must face the skin; validate retention and ambient-light shielding rather than covering the sensor lens with opaque material.
 4. Compile and upload the firmware below. First test the electronics off-body on USB. Confirm both sensors initialize and that the optical stream changes when a stationary finger is placed over the lens.
 5. Only after the power circuit, enclosure and retention have been checked, disconnect all external power for an experimental body-worn test. Adjust the strap loosely enough for circulation. Do not wear the current concept.
 6. Subscribe to ZOOP's standard BLE heart-rate service with a generic BLE client, or read USB serial for the full pulse/motion stream.
 
 The [BOM](BOM.csv) lists purchased soldering and measuring tools and remaining candidate assembly tools; borrow tools if available and request only what is needed. The existing Mac laptop is used for CAD and firmware. Printing service costs still need a quote.
+
+### Physical testing plan
+
+These tests have not been performed on ZOOP hardware. Work off-body on a nonconductive surface; disconnect all power before changing wires.
+
+1. Verify the actual sensor boards' supply and I²C levels. Solder headers or wires securely, then check each intended connection and check for shorts between power and ground or adjacent pins with the multimeter.
+2. Leave the battery and charger disconnected. Connect both sensors according to the wiring table, then upload the firmware over ESP32 USB. Open the Serial Monitor at 115200 baud. Sensor errors require disconnecting power and fixing the wiring before retrying.
+3. Check that the serial IR values change when the optical sensor is covered, that motion values change when the MPU6050 moves, and that a BLE client can discover ZOOP. These are basic communication checks, not evidence of heart-rate accuracy.
+4. Once the power circuit has been reviewed and the charge-current jumper set to 500 mA, check the charger's regulated output with the multimeter before connecting it to the ESP32. Never connect ESP32 USB and the external 3.3 V output at the same time. Measure battery-powered runtime and compare a resting pulse with a manual count only after safe source isolation and retention have been designed; do not wear the current case.
 
 ## Firmware
 
@@ -88,11 +91,11 @@ Over BLE, the device name is **ZOOP**, Heart Rate Service is `0x180D`, and Heart
 
 ## BOM and funding
 
-[BOM.csv](BOM.csv) lists the owned supplies, cable and laptop, and purchased wire, soldering kit and multimeter at **$0 requested**. The remaining provisional subtotal is **$91.76**, including the proposed battery and charger, candidate tools not yet confirmed owned, a $20 print allowance, and $2 for the optional custom PCB. The PCB is an alternative to the owned perfboard; its advertised starting price is not a quote. Retail pack sizes and linked prices are shown.
+[BOM.csv](BOM.csv) lists the owned supplies, jumper wires, cable and laptop, and purchased wire, soldering kit and multimeter at **$0 requested**. The remaining provisional subtotal is **$89.76**, including the proposed battery and charger, candidate tools not yet confirmed owned and a $20 print allowance. No custom PCB is requested. Solder is listed as a conditional purchase, not included in the subtotal, until the purchased kit's contents are confirmed.
 
 This is **not a final funding request**: the $20 allowance for printing the case, lid and optical retainer is not a quote and could be too low; shipping, tax and any extra mounting materials are also unquoted. Prices are dated US retail listings, including older search-indexed listings, not live checkout quotes; confirm current prices, availability, local voltage and delivery before ordering. The caliper listing was in-store only. Confirm which tools can be borrowed and request only eligible essentials. Get a print quote after revising the design and obtain checkout totals for the destination.
 
-The battery power concept and its enlarged enclosure have not been tested and are not Whoop-sized. Do not order a case print until the mechanical and electrical design is complete.
+The battery power concept and its enlarged enclosure have not been tested and are not Whoop-sized. Power-source isolation and battery retention still need design, so the BOM cannot yet guarantee a complete final shopping list. Do not order a case print until the mechanical and electrical design is complete.
 
 ## Validation and honest limitations
 

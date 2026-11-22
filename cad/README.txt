@@ -22,7 +22,7 @@ thin 3/4-inch (19.05 mm) webbing; test fabric thickness and strength. The
 strap solids are short folded reference shapes, not a complete wrist strap.
 
 Carrier is a 44 x 18 x 1.6 mm envelope. Either trim the owned 20 x 80 mm
-perfboard to this envelope or use the optional custom carrier PCB; verify
+perfboard to this envelope; verify
 available holes and clearance before cutting. Case rails support the carrier;
 the enlarged lid no longer has carrier keepers. The MAX30102 board slides between underside
 guides facing the aperture. The separate optical retainer is a loose stop;
