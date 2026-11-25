@@ -14,6 +14,12 @@ Open the [FreeCAD assembly](cad/ZOOP_assembly.FCStd). [Assembly STEP](cad/assemb
 
 A separate [v2 case, lid and optical retainer fit study](cad/v2/README.txt) explores a shorter 48 × 44 mm footprint including strap tabs. It is 34 mm tall and remains an unpowered, untested concept with unresolved battery, wiring and mounting details; it is not ready to wear.
 
+### v3: every internal part modeled
+
+![ZOOP v3 with all internal parts, lid raised](cad/v3/assembly-preview.png)
+
+The [v3 model](cad/v3/README.txt) ([FreeCAD](cad/v3/ZOOP_v3_full_contents.FCStd), [assembly STEP](cad/v3/assembly.step)) contains everything planned to go inside the band: both sensors, the ESP32-S3-Zero on the cut perfboard, the 500 mAh battery in a printed tray, the bq25185 charger (geometry from Adafruit's published board file), the slide switch, solder-joint keepouts and every wire bundle. It is 38 × 48 mm (44.8 mm across the wrist with strap bars) and about 26.5 mm tall. FreeCAD checks that no parts overlap, both USB ports, the switch and the optical window are reachable, and every part can be lowered in from the top. Several module dimensions are still **assumed** and listed in the v3 README; measure your parts before printing.
+
 ## Electronics
 
 The build uses the owned **perfboard**, not an ordered PCB. An earlier [custom carrier design](electronics/README.md) is retained for reference but is not part of the build or the purchase request.
@@ -31,7 +37,7 @@ This earlier image shows the USB-powered sensor prototype, **not the rechargeabl
 | GPIO5 | SDA | SDA |
 | GPIO6 | SCL | SCL |
 
-The MAX30102 normally uses I²C address `0x57`; grounding MPU6050 AD0 selects `0x68`. Leave unused INT, XDA, XCL and other signals disconnected. The MSK-12C02 is listed as owned but **unused**: unplugging USB alone will not turn off a battery-powered circuit. Some versions are rated only 50 mA and must not switch ESP32 power directly.
+The MAX30102 normally uses I²C address `0x57`; grounding MPU6050 AD0 selects `0x68`. Leave unused INT, XDA, XCL and other signals disconnected. The MSK-12C02 is rated only 50 mA, so it must never switch ESP32 power directly. In the v3 design it instead connects the charger's **EN** pad to GND, which shuts down the charger's 3.3 V buck; the switch then carries only about 45 µA. Check which slider position is OFF with the multimeter before closing the case.
 
 **Breakout variants differ.** Inspect the actual regulators, LED supply and I²C pull-ups. SDA/SCL must not be pulled to 5 V, and the combined pull-up resistance must be suitable for the shared bus. Some GY-521 regulators will not operate reliably from a 3.3 V input. If either module cannot accept the assumed supply, revise the wiring and schematic before powering it; do not infer safety from its marketplace name.
 
@@ -43,13 +49,13 @@ The proposed on-band supply is a protected [500 mAh LiPo](https://www.adafruit.c
 
 The intended battery-powered configuration is the charger board's **3.3 V output** to the ESP32 3V3 and sensor 3.3 V rail, with grounds common. Never connect the battery to the ESP32 or 3.3 V rail directly. The charger output can fall to 3.0 V as the battery empties; operation, brownout behavior and runtime with the actual boards are untested. The existing carrier schematic is a signal distribution board only: it does **not** show or include the charger, battery, source selection or protection.
 
-**Do not connect ESP32 USB while the charger 3.3 V output is connected to its 3V3 pin:** the two supplies may backfeed. For programming or USB serial, disconnect the charger output from the ESP32 rail first; for battery operation, unplug ESP32 USB before reconnecting it. Use a removable, insulated connection until a properly engineered power-path selector is designed. Charge off-body, with the ESP32 USB disconnected, and never wear it connected to a computer or mains charger. The existing 50 mA switch is not specified to switch the load safely.
+**Do not connect ESP32 USB while the charger 3.3 V output is connected to its 3V3 pin:** the two supplies may backfeed. For programming or USB serial, remove the lid, slide the switch OFF and unplug the battery JST before plugging USB into the ESP32; for battery operation, unplug ESP32 USB before reconnecting the battery. This procedure is untested. Use a removable, insulated connection until a properly engineered power-path selector is designed. Charge off-body, with the ESP32 USB disconnected, and never wear it connected to a computer or mains charger. The 50 mA switch is used only on the EN signal, never on the load.
 
 ## Build and use
 
 1. Measure board outlines, thicknesses, header orientation, sensor position and USB plug clearance. Adjust the CAD parameters and regenerate exports before printing. Verify the actual electrical requirements above.
 2. Use the owned perfboard as the carrier; do not cut it until the fit and hole positions are verified. Use insulated wires, trim header pins for clearance and label both ends. Check continuity and shorts with power disconnected.
-3. Before printing, finish the [CAD design](cad/README.txt): the larger case only includes battery and charger reference envelopes. It lacks secure retention, charger port access, wiring and adequate verified battery clearances. The carrier, ESP32 and GY-521 also need verified fasteners. The optical window must face the skin; validate retention and ambient-light shielding rather than covering the sensor lens with opaque material.
+3. Before printing, measure your modules and update the [v3 model](cad/v3/README.txt), which includes retention, charger port access, wiring routes and battery clearance, then test-print it. The original [CAD design](cad/README.txt) lacks these. The optical window must face the skin; validate retention and ambient-light shielding rather than covering the sensor lens with opaque material.
 4. Compile and upload the firmware below. First test the electronics off-body on USB. Confirm both sensors initialize and that the optical stream changes when a stationary finger is placed over the lens.
 5. Only after the power circuit, enclosure and retention have been checked, disconnect all external power for an experimental body-worn test. Adjust the strap loosely enough for circulation. Do not wear the current concept.
 6. Subscribe to ZOOP's standard BLE heart-rate service with a generic BLE client, or read USB serial for the full pulse/motion stream.

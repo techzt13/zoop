@@ -1,0 +1,48 @@
+ZOOP v3 full-contents model: FreeCAD 1.1.4
+Units: mm and mm^3. Assumed dimensions are listed in README.txt.
+CaseBase: valid; one solid; volume 11344.089
+Lid: valid; one solid; volume 3386.750
+BatteryTray: valid; one solid; volume 1159.902
+ElectronicsDeck: valid; one solid; volume 1249.765
+MAX30102: valid; one solid; volume 511.372
+GY521: valid; one solid; volume 921.380
+Battery: valid; one solid; volume 4959.000
+Charger: valid; one solid; volume 2147.475
+ChargerJoints: valid; one solid; volume 19.975
+Carrier: valid; one solid; volume 970.828
+ESP32S3Zero: valid; one solid; volume 966.234
+ESPJoints: valid; one solid; volume 26.250
+ESPJoints2: valid; one solid; volume 26.250
+BusJoints: valid; one solid; volume 120.350
+Switch: valid; one solid; volume 32.640
+WireMAX: valid; one solid; volume 66.640
+WireGY: valid; one solid; volume 55.776
+WireRiser: valid; one solid; volume 485.503
+WireBus: valid; one solid; volume 162.890
+WirePower: valid; one solid; volume 187.376
+BatteryLeads: valid; one solid; volume 333.606
+Positive-volume intersections between parts: 0
+Access path clear: charger USB-C plug
+Access path clear: ESP USB-C plug with lid removed
+Access path clear: switch actuator fingernail access
+Access path clear: optical window below sensor
+Access path clear: strap slot +X
+Access path clear: strap slot -X
+Top-down insertion of every printed part and module: clear
+WireMAX along X: 4 wires need 7.8 mm^2 at 1.4 mm OD; smallest section 7.8 mm^2 OK
+WireGY along X: 4 wires need 7.8 mm^2 at 1.4 mm OD; smallest section 23.2 mm^2 OK
+WireGY AD0 link along Y: 1 wires need 2.0 mm^2 at 1.4 mm OD; smallest section 3.4 mm^2 OK
+WireRiser floor run along Y: 4 wires need 7.8 mm^2 at 1.4 mm OD; smallest section 12.5 mm^2 OK
+WireRiser vertical: 8 wires need 15.7 mm^2 at 1.4 mm OD; smallest section 25.2 mm^2 OK
+WireBus fan-out along Y: 6 wires need 11.8 mm^2 at 1.4 mm OD; smallest section 13.4 mm^2 OK
+WirePower along X: 3 wires need 5.9 mm^2 at 1.4 mm OD; smallest section 7.8 mm^2 OK
+BatteryLeads through deck: 2 wires need 3.9 mm^2 at 1.4 mm OD; smallest section 11.8 mm^2 OK
+Case footprint including strap bars: 44.8 x 48.0 mm
+Case body without strap bars: 38.0 x 48.0 mm
+Height with lid: 26.45 mm (excluding screw heads and strap)
+CaseBase: STEP reimport valid; STL closed with matching bounds
+Lid: STEP reimport valid; STL closed with matching bounds
+BatteryTray: STEP reimport valid; STL closed with matching bounds
+ElectronicsDeck: STEP reimport valid; STL closed with matching bounds
+Assembly STEP reimport: 21 valid solids
+These checks do not prove physical fit, safety, comfort or pulse accuracy.

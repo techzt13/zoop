@@ -4,6 +4,10 @@ ZOOP mechanical concept — not a finished or validated wearable
 A shorter second-iteration unpowered fit study is in v2/README.txt. It is a
 separate concept, not a validated replacement for the assembly below.
 
+The latest model is v3/README.txt: it includes every planned internal part,
+wire route, retention feature and port opening, and supersedes the power and
+retention gaps described below. It is still unverified against real parts.
+
 ZOOP_assembly.FCStd is a FreeCAD 1.1.4 document with separate solids for
 the case, lid, carrier, optical retainer, module and rechargeable power
 reference envelopes, straps and screws. assembly.step and the individual STEP files use assembled
