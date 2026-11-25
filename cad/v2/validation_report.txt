@@ -1,0 +1,20 @@
+ZOOP v2 fit-study: FreeCAD 1.1.4
+Units: mm and mm^3. Boxes are unverified component envelopes.
+CaseBase: valid; one solid; volume 14542.1605
+Lid: valid; one solid; volume 3483.8089
+OpticalRetainer: valid; one solid; volume 52.4400
+Carrier: valid; one solid; volume 979.2000
+ESP: valid; one solid; volume 676.8000
+GY521: valid; one solid; volume 512.0000
+MAX30102: valid; one solid; volume 342.2440
+Battery: valid; one solid; volume 4959.0000
+Charger: valid; one solid; volume 5738.0000
+CaseBase: STEP reimport valid; STL closed with matching bounds
+Lid: STEP reimport valid; STL closed with matching bounds
+OpticalRetainer: STEP reimport valid; STL closed with matching bounds
+Assembly STEP reimport: 9 valid solids
+Positive-volume intersections: 0
+Two 19.6 x 2 mm strap slots and optical aperture: open
+Case outer footprint including strap slots: 48 x 44 mm
+Case and lid height: 34 mm; excludes screws and webbing
+These checks do not prove physical fit, retention, safety, or comfort.

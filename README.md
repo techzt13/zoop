@@ -12,6 +12,8 @@ ZOOP is an original, Whoop-inspired experiment built around an ESP32-S3-Zero, a 
 
 Open the [FreeCAD assembly](cad/ZOOP_assembly.FCStd). [Assembly STEP](cad/assembly.step), individual part STEP files, modeling source, dimensions and mechanical validation details are in [cad/](cad/). Electronics are explicitly labeled reference-envelope models, not dimensionally certified supplier models.
 
+A separate [v2 case, lid and optical retainer fit study](cad/v2/README.txt) explores a shorter 48 × 44 mm footprint including strap tabs. It is 34 mm tall and remains an unpowered, untested concept with unresolved battery, wiring and mounting details; it is not ready to wear.
+
 ## Electronics
 
 The build uses the owned **perfboard**, not an ordered PCB. An earlier [custom carrier design](electronics/README.md) is retained for reference but is not part of the build or the purchase request.
