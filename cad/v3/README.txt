@@ -77,10 +77,13 @@ slider position is OFF with the multimeter before closing the case.
 Unused pins on the charger's bottom header are not connected.
 
 Charging: through the charger's USB-C in the -X wall, off the wrist.
-Programming: remove the lid, slide the switch OFF, unplug the battery JST, then
-  plug USB into the ESP32 through the +X wall notch. Never connect both USB
-  ports at once. This procedure is not yet tested; what the buck does when its
-  output is held up by the ESP32 is not documented.
+Programming: with all power disconnected, physically disconnect and insulate
+  the charger 3.3 V output connection before plugging USB into the ESP32.
+  Switching EN off and unplugging the battery do not isolate that output.
+  A removable insulated connection or engineered power-path selector still
+  needs to be designed and fitted; this model does not accommodate a verified
+  one. Disconnect ESP32 USB before restoring the charger connection. Never
+  connect both USB ports at once.
 
 Assembly order
 --------------
